@@ -3,80 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Script Editor</title>
+    <title>Script-Ware Executor</title>
     <style>
-        /* Style for tabs */
-        .tab {
+        /* Your CSS styles here */
+        .tab-content {
             display: none;
         }
-
-        /* Style for active tab */
-        .tab.active {
+        .tab-content.active {
             display: block;
         }
     </style>
 </head>
 <body>
-    <div>
-        <!-- Script editor -->
+    <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'scripts')">Scripts</button>
+        <button class="tablinks" onclick="openTab(event, 'editor')">Editor</button>
+    </div>
+
+    <div id="scripts" class="tab-content active">
+        <!-- Scripts content here -->
+    </div>
+
+    <div id="editor" class="tab-content">
         <textarea id="script-editor" rows="10" cols="50"></textarea>
-    </div>
-    <div>
-        <!-- Execute button -->
-        <button id="execute-btn">Execute</button>
-        <!-- Clear button -->
-        <button id="clear-btn">Clear</button>
-    </div>
-    <div>
-        <!-- Tabs -->
-        <button class="tab-btn" onclick="openTab('tab1')">Tab 1</button>
-        <button class="tab-btn" onclick="openTab('tab2')">Tab 2</button>
-    </div>
-    <div>
-        <!-- Tab content -->
-        <div id="tab1" class="tab active">
-            Tab 1 Content
-        </div>
-        <div id="tab2" class="tab">
-            Tab 2 Content
-        </div>
+        <button onclick="executeScript()">Execute</button>
+        <button onclick="clearEditor()">Clear</button>
     </div>
 
     <script>
-        // Execute button functionality
-        document.getElementById('execute-btn').addEventListener('click', function() {
-            var script = document.getElementById('script-editor').value;
-            // Execute the Lua script
-            executeScript(script);
-        });
-
-        // Clear button functionality
-        document.getElementById('clear-btn').addEventListener('click', function() {
-            document.getElementById('script-editor').value = '';
-        });
-
-        // Function to switch between tabs
-        function openTab(tabName) {
-            var i, tabContent, tabLinks;
-            tabContent = document.getElementsByClassName("tab");
-            for (i = 0; i < tabContent.length; i++) {
-                tabContent[i].style.display = "none";
+        // Your JavaScript code here
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
             }
-            tabLinks = document.getElementsByClassName("tab-btn");
-            for (i = 0; i < tabLinks.length; i++) {
-                tabLinks[i].classList.remove("active");
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
             }
             document.getElementById(tabName).style.display = "block";
-            event.currentTarget.classList.add("active");
+            evt.currentTarget.className += " active";
         }
 
-        // Function to execute the Lua script
-        function executeScript(script) {
-            // Code to execute the Lua script
-            console.log('Executing Lua script:', script);
-            // Example: You can use an API to execute Lua scripts in a Lua environment
-            // For instance, you can use a Lua interpreter like LuaJIT or Luvit
-            // Or if you're using a specific platform or game, find the appropriate method to execute Lua scripts
+        function executeScript() {
+            var script = document.getElementById('script-editor').value;
+            // Execute the script using Script-Ware iOS Executor
+            // Example: execute(script);
+        }
+
+        function clearEditor() {
+            document.getElementById('script-editor').value = "";
         }
     </script>
 </body>
