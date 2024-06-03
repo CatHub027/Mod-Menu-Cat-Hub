@@ -1,89 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mod Menu</title>
-  
-  <style>
-    .mod-menu {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      background-color: #fff;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mod Menu</title>
+<style>
+/* CSS styles go here */
+.mod-menu {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-    .options {
-      display: none;
-    }
+.menu-content {
+    display: none;
+}
 
-    .options.active {
-      display: block;
-    }
+.menu-content.show {
+    display: block;
+}
 
-    img {
-      width: 50px; /* Adjust size as needed */
-      height: 50px; /* Adjust size as needed */
-      margin: 10px; /* Adjust margin as needed */
-      border: 1px solid #ccc; /* Optional: Add border */
-    }
-  </style>
-  
+.toggle-btn {
+    cursor: pointer;
+}
+
+.toggle-btn img {
+    width: 30px;
+    height: 30px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 5px 0;
+}
+
+button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+</style>
 </head>
 <body>
-  <div class="mod-menu">
-    <button id="toggle-btn">Toggle Mod Menu</button>
-    <div class="options">
-      <button id="walkspeed-btn">Set Walkspeed</button>
-      <button id="jump-power-btn">Set Jump Power</button>
-      <button id="noclip-btn">Toggle Noclip</button>
+
+<div class="mod-menu">
+    <div class="toggle-btn" id="toggle-btn">
+        <img src="square_icon.png" alt="Toggle Icon" id="toggle-icon">
     </div>
-  </div>
+    <div class="menu-content" id="menu-content">
+        <ul>
+            <li>
+                <button id="walkspeed-btn">Set Walkspeed</button>
+                <input type="number" id="walkspeed-input" placeholder="Walkspeed">
+            </li>
+            <li>
+                <button id="jump-power-btn">Set Jump Power</button>
+                <input type="number" id="jump-power-input" placeholder="Jump Power">
+            </li>
+            <li>
+                <button id="noclip-btn">Toggle Noclip</button>
+            </li>
+        </ul>
+    </div>
+</div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const toggleBtn = document.getElementById("toggle-btn");
-      const options = document.querySelector(".options");
-      const roblox = document.querySelectorAll(".roblox");
+<script>
+// JavaScript code goes here
+document.addEventListener('DOMContentLoaded', function () {
+    const toggleBtn = document.getElementById('toggle-btn');
+    const menuContent = document.getElementById('menu-content');
 
-      toggleBtn.addEventListener("click", function() {
-        options.classList.toggle("active");
-        roblox.forEach(element => {
-          element.classList.toggle("hidden");
-        });
-      });
-
-      const walkspeedBtn = document.getElementById("walkspeed-btn");
-      walkspeedBtn.addEventListener("click", function() {
-        const walkspeed = prompt("Enter Walkspeed:");
-        if (walkspeed !== null) {
-          alert("Walkspeed set to: " + walkspeed);
-          // You can add logic here to set the walkspeed in the workspace
-        }
-      });
-
-      const jumpPowerBtn = document.getElementById("jump-power-btn");
-      jumpPowerBtn.addEventListener("click", function() {
-        const jumpPower = prompt("Enter Jump Power:");
-        if (jumpPower !== null) {
-          alert("Jump Power set to: " + jumpPower);
-          // You can add logic here to set the jump power in the workspace
-        }
-      });
-
-      const noclipBtn = document.getElementById("noclip-btn");
-      noclipBtn.addEventListener("click", function() {
-        const confirmNoclip = confirm("Toggle Noclip?");
-        if (confirmNoclip) {
-          alert("Noclip toggled");
-          // You can add logic here to toggle noclip in the workspace
-        }
-      });
+    toggleBtn.addEventListener('click', function () {
+        menuContent.classList.toggle('show');
     });
-  </script>
-  
+
+    document.getElementById('walkspeed-btn').addEventListener('click', function () {
+        const walkspeed = parseFloat(document.getElementById('walkspeed-input').value);
+        if (!isNaN(walkspeed)) {
+            alert('Walkspeed set to: ' + walkspeed);
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = walkspeed;
+        } else {
+            alert('Invalid walkspeed value');
+        }
+    });
+
+    document.getElementById('jump-power-btn').addEventListener('click', function () {
+        const jumpPower = parseFloat(document.getElementById('jump-power-input').value);
+        if (!isNaN(jumpPower)) {
+            alert('Jump Power set to: ' + jumpPower);
+            game.Players.LocalPlayer.Character.Humanoid.JumpPower = jumpPower;
+        } else {
+            alert('Invalid jump power value');
+        }
+    });
+
+    let noclipEnabled = false;
+    document.getElementById('noclip-btn').addEventListener('click', function () {
+        noclipEnabled = !noclipEnabled;
+        if (noclipEnabled) {
+            alert('Noclip enabled');
+            // Code to enable noclip and adjust workspace
+        } else {
+            alert('Noclip disabled');
+            // Code to disable noclip and adjust workspace
+        }
+    });
+});
+</script>
 </body>
 </html>
