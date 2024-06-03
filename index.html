@@ -1,85 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Script-Ware iOS Executor</title>
-    <style>
-        /* Your CSS styles here */
-        .tabContent {
-            display: none;
-        }
-
-        .activeTab {
-            display: block;
-        }
-
-        .card {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cat Hub Executor</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="tabs">
-        <button onclick="openTab('scriptTab')">Script</button>
-        <button onclick="openTab('editorTab')">Editor</button>
+  <div class="card">
+    <h2><center>Cat Hub Executor</center></h2>
+    <hr class="thick-line">
+    <h3><center>iOS</center></h3>
+    <hr class="thick-line">
+    <div class="editor">
+      <textarea id="luaCode" rows="6" placeholder="Enter Lua code here..."></textarea>
     </div>
-
-    <div id="scriptTab" class="tabContent activeTab">
-        <div class="card">
-            <h3>Script Description</h3>
-            <p>This is the description of the script tab.</p>
-            <button id="getScriptButton">GET SCRIPT</button>
-        </div>
-        
-        <textarea id="scriptEditor" rows="10" cols="50"></textarea><br>
-        <button id="executeButton">Execute</button>
-        <button id="clearButton">Clear</button>
+    <div class="buttons">
+      <button onclick="executeScript()">Execute</button>
+      <button onclick="clearScript()">Clear</button>
     </div>
-
-    <div id="editorTab" class="tabContent">
-        <!-- Editor content goes here -->
-        <!-- Example content -->
-        <textarea id="editorContent" rows="10" cols="50">Editor Content</textarea><br>
-        <button id="editorButton">Editor Button</button>
+    <hr class="thick-line">
+    <div id="output"></div>
+    <button class="get-script" onclick="getExternalScript()">GET SCRIPT</button>
     </div>
+  </div>
 
-    <script>
-        function openTab(tabName) {
-            var i, tabContent;
-            tabContent = document.getElementsByClassName("tabContent");
-            for (i = 0; i < tabContent.length; i++) {
-                tabContent[i].style.display = "none";
-            }
-            document.getElementById(tabName).style.display = "block";
-        }
+  <script>
+      function executeScript() {
+  var code = document.getElementById("luaCode").value;
+  // Execute Lua code here
+  document.getElementById("output").innerText = "Executing: " + code;
+}
 
-        document.getElementById('executeButton').addEventListener('click', function() {
-            var script = document.getElementById('scriptEditor').value;
-            try {
-                // Roblox Lua print function
-                console.log = function(text) {
-                    var logDiv = document.createElement('div');
-                    logDiv.textContent = text;
-                    document.body.appendChild(logDiv);
-                };
+function clearScript() {
+  document.getElementById("luaCode").value = "";
+  document.getElementById("output").innerText = "";
+}
 
-                // Execute the script
-                eval(script);
-            } catch (error) {
-                // Handle errors if necessary
-            }
-        });
-
-        document.getElementById('getScriptButton').addEventListener('click', function() {
-            // Code to fetch script goes here
-        });
-
-        document.getElementById('clearButton').addEventListener('click', function() {
-            document.getElementById('scriptEditor').value = '';
-        });
-    </script>
+function getExternalScript() {
+  // Load Lua script from URL
+  var scriptUrl = "https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source";
+  fetch(scriptUrl)
+    .then(response => response.text())
+    .then(script => {
+      // Execute the loaded Lua script
+      eval(script);
+    })
+    .catch(error => console.error('Error fetching script:', error));
+}
+  </script>
 </body>
 </html>
