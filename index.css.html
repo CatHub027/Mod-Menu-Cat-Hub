@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mod Menu</title>
+    <style>
+        /* CSS styles */
+        .mod-menu {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .menu-toggle {
+            cursor: pointer;
+        }
+
+        .menu-content {
+            display: none;
+        }
+
+        .menu-content.active {
+            display: block;
+        }
+
+        .menu-icon {
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="mod-menu">
+        <div class="menu-toggle">
+            <img src="square_icon.png" alt="Menu Icon" class="menu-icon">
+        </div>
+        <div class="menu-content">
+            <button onclick="setWalkSpeed()">Set Walkspeed</button>
+            <button onclick="setJumpPower()">Set Jump Power</button>
+            <button onclick="toggleNoclip()">Noclip</button>
+            <button onclick="joinDiscord()">Join Discord</button>
+        </div>
+</body>
+</html>
