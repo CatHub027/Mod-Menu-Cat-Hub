@@ -6,26 +6,70 @@
     <title>Script-Ware iOS Executor</title>
     <style>
         /* Your CSS styles here */
+        .tabContent {
+            display: none;
+        }
+
+        .activeTab {
+            display: block;
+        }
+
+        .card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
-    <div id="script">
+    <div id="tabs">
+        <button onclick="openTab('scriptTab')">Script</button>
+        <button onclick="openTab('editorTab')">Editor</button>
+    </div>
+
+    <div id="scriptTab" class="tabContent activeTab">
+        <div class="card">
+            <h3>Script Description</h3>
+            <p>This is the description of the script tab.</p>
+            <button id="getScriptButton">GET SCRIPT</button>
+        </div>
+        
         <textarea id="scriptEditor" rows="10" cols="50"></textarea><br>
         <button id="executeButton">Execute</button>
         <button id="clearButton">Clear</button>
-        <button id="getScriptButton">GET SCRIPT</button>
     </div>
-    <div id="editor" style="display: none;">
+
+    <div id="editorTab" class="tabContent">
         <!-- Editor content goes here -->
+        <!-- Example content -->
+        <textarea id="editorContent" rows="10" cols="50">Editor Content</textarea><br>
+        <button id="editorButton">Editor Button</button>
     </div>
 
     <script>
+        function openTab(tabName) {
+            var i, tabContent;
+            tabContent = document.getElementsByClassName("tabContent");
+            for (i = 0; i < tabContent.length; i++) {
+                tabContent[i].style.display = "none";
+            }
+            document.getElementById(tabName).style.display = "block";
+        }
+
         document.getElementById('executeButton').addEventListener('click', function() {
             var script = document.getElementById('scriptEditor').value;
             try {
+                // Roblox Lua print function
+                console.log = function(text) {
+                    var logDiv = document.createElement('div');
+                    logDiv.textContent = text;
+                    document.body.appendChild(logDiv);
+                };
+
+                // Execute the script
                 eval(script);
             } catch (error) {
-                console.error(error);
+                // Handle errors if necessary
             }
         });
 
