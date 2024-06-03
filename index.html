@@ -3,57 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Script-Ware Executor</title>
+    <title>Script Executor</title>
     <style>
-        /* Your CSS styles here */
-        .tab-content {
-            display: none;
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
         }
-        .tab-content.active {
-            display: block;
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .editor {
+            width: 100%;
+            height: 200px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <div class="tab">
-        <button class="tablinks" onclick="openTab(event, 'scripts')">Scripts</button>
-        <button class="tablinks" onclick="openTab(event, 'editor')">Editor</button>
-    </div>
-
-    <div id="scripts" class="tab-content active">
-        <!-- Scripts content here -->
-    </div>
-
-    <div id="editor" class="tab-content">
-        <textarea id="script-editor" rows="10" cols="50"></textarea>
-        <button onclick="executeScript()">Execute</button>
-        <button onclick="clearEditor()">Clear</button>
+    <div class="container">
+        <h2>Script Executor</h2>
+        <div class="editor" id="scriptEditor" contenteditable="true">-- Write your Lua script here</div>
+        <button class="btn" onclick="executeScript()">Execute</button>
+        <button class="btn" onclick="clearScript()">Clear</button>
+        <div id="scriptOutput"></div>
     </div>
 
     <script>
-        // Your JavaScript code here
-        function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
-
+        // Add your JavaScript code here
         function executeScript() {
-            var script = document.getElementById('script-editor').value;
-            // Execute the script using Script-Ware iOS Executor
-            // Example: execute(script);
+            var script = document.getElementById("scriptEditor").innerText;
+            try {
+                var result = loadstring(script)();
+                document.getElementById("scriptOutput").innerText = result;
+            } catch (error) {
+                document.getElementById("scriptOutput").innerText = "Error: " + error.message;
+            }
         }
 
-        function clearEditor() {
-            document.getElementById('script-editor').value = "";
+        function clearScript() {
+            document.getElementById("scriptEditor").innerText = "";
+            document.getElementById("scriptOutput").innerText = "";
         }
     </script>
 </body>
