@@ -1,25 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mod Menu</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mod Menu</title>
+  <style>
+    .mod-menu {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background-color: #fff;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .options {
+      display: none;
+    }
+
+    .options.active {
+      display: block;
+    }
+
+    img {
+      width: 50px; /* Adjust size as needed */
+      height: 50px; /* Adjust size as needed */
+      margin: 10px; /* Adjust margin as needed */
+      border: 1px solid #ccc; /* Optional: Add border */
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="mod-menu">
-            <button id="toggleBtn">Toggle Menu</button>
-            <div id="menu" class="menu hidden">
-                <button id="walkspeedBtn">Set Walkspeed</button>
-                <input type="number" id="walkspeedInput" placeholder="Enter walkspeed">
-                <button id="jumpPowerBtn">Set Jump Power</button>
-                <input type="number" id="jumpPowerInput" placeholder="Enter jump power">
-                <button id="noclipBtn">Toggle Noclip</button>
-            </div>
-        </div>
+  <div class="mod-menu">
+    <button id="toggle-btn">Toggle Mod Menu</button>
+    <div class="options">
+      <button id="walkspeed-btn">Set Walkspeed</button>
+      <button id="jump-power-btn">Set Jump Power</button>
+      <button id="noclip-btn">Toggle Noclip</button>
     </div>
+  </div>
 
-    <script src="script.js"></script>
+  <img src="icon_square_x.png" alt="Icon Square X">
+  <img src="icon_square_y.png" alt="Icon Square Y">
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const toggleBtn = document.getElementById("toggle-btn");
+      const options = document.querySelector(".options");
+      const roblox = document.querySelectorAll(".roblox");
+
+      toggleBtn.addEventListener("click", function() {
+        options.classList.toggle("active");
+        roblox.forEach(element => {
+          element.classList.toggle("hidden");
+        });
+      });
+
+      const walkspeedBtn = document.getElementById("walkspeed-btn");
+      walkspeedBtn.addEventListener("click", function() {
+        const walkspeed = prompt("Enter Walkspeed:");
+        if (walkspeed !== null) {
+          alert("Walkspeed set to: " + walkspeed);
+          // You can add logic here to set the walkspeed in the workspace
+        }
+      });
+
+      const jumpPowerBtn = document.getElementById("jump-power-btn");
+      jumpPowerBtn.addEventListener("click", function() {
+        const jumpPower = prompt("Enter Jump Power:");
+        if (jumpPower !== null) {
+          alert("Jump Power set to: " + jumpPower);
+          // You can add logic here to set the jump power in the workspace
+        }
+      });
+
+      const noclipBtn = document.getElementById("noclip-btn");
+      noclipBtn.addEventListener("click", function() {
+        const confirmNoclip = confirm("Toggle Noclip?");
+        if (confirmNoclip) {
+          alert("Noclip toggled");
+          // You can add logic here to toggle noclip in the workspace
+        }
+      });
+    });
+  </script>
 </body>
 </html>
