@@ -3,68 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Script Executor</title>
+    <title>Script-Ware iOS Executor</title>
     <style>
-        /* Add your CSS styles here */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .editor {
-            width: 100%;
-            height: 200px;
-            border: 1px solid #ccc;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-        .btn {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .btn:hover {
-            background-color: #0056b3;
-        }
+        /* Your CSS styles here */
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Script Executor</h2>
-        <div class="editor" id="scriptEditor" contenteditable="true">-- Write your Lua script here</div>
-        <button class="btn" onclick="executeScript()">Execute</button>
-        <button class="btn" onclick="clearScript()">Clear</button>
-        <div id="scriptOutput"></div>
+    <div id="script">
+        <textarea id="scriptEditor" rows="10" cols="50"></textarea><br>
+        <button id="executeButton">Execute</button>
+        <button id="clearButton">Clear</button>
+        <button id="getScriptButton">GET SCRIPT</button>
+    </div>
+    <div id="editor" style="display: none;">
+        <!-- Editor content goes here -->
     </div>
 
     <script>
-        // Add your JavaScript code here
-        function executeScript() {
-            var script = document.getElementById("scriptEditor").innerText;
+        document.getElementById('executeButton').addEventListener('click', function() {
+            var script = document.getElementById('scriptEditor').value;
             try {
-                var result = loadstring(script)();
-                document.getElementById("scriptOutput").innerText = result;
+                eval(script);
             } catch (error) {
-                document.getElementById("scriptOutput").innerText = "Error: " + error.message;
+                console.error(error);
             }
-        }
+        });
 
-        function clearScript() {
-            document.getElementById("scriptEditor").innerText = "";
-            document.getElementById("scriptOutput").innerText = "";
-        }
+        document.getElementById('getScriptButton').addEventListener('click', function() {
+            // Code to fetch script goes here
+        });
+
+        document.getElementById('clearButton').addEventListener('click', function() {
+            document.getElementById('scriptEditor').value = '';
+        });
     </script>
 </body>
 </html>
