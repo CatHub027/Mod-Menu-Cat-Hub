@@ -3,48 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mod Menu</title>
+    <title>Script Editor</title>
     <style>
-        /* CSS styles */
-        .mod-menu {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-        }
-
-        .menu-toggle {
-            cursor: pointer;
-        }
-
-        .menu-content {
+        /* Style for tabs */
+        .tab {
             display: none;
         }
 
-        .menu-content.active {
+        /* Style for active tab */
+        .tab.active {
             display: block;
-        }
-
-        .menu-icon {
-            width: 30px;
-            height: 30px;
         }
     </style>
 </head>
 <body>
-    <div class="mod-menu">
-        <div class="menu-toggle">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmSSKvrQNcAPwBO0jk44Gu0ajUI5xUIkx-cOXuzVa0JA&s" alt="Menu Icon" class="menu-icon">
+    <div>
+        <!-- Script editor -->
+        <textarea id="script-editor" rows="10" cols="50"></textarea>
+    </div>
+    <div>
+        <!-- Execute button -->
+        <button id="execute-btn">Execute</button>
+        <!-- Clear button -->
+        <button id="clear-btn">Clear</button>
+    </div>
+    <div>
+        <!-- Tabs -->
+        <button class="tab-btn" onclick="openTab('tab1')">Tab 1</button>
+        <button class="tab-btn" onclick="openTab('tab2')">Tab 2</button>
+    </div>
+    <div>
+        <!-- Tab content -->
+        <div id="tab1" class="tab active">
+            Tab 1 Content
         </div>
-        <div class="menu-content">
-            <button onclick="setWalkSpeed()">Set Walkspeed</button>
-            <button onclick="setJumpPower()">Set Jump Power</button>
-            <button onclick="toggleNoclip()">Noclip</button>
-            <button onclick="joinDiscord()">Join Discord</button>
+        <div id="tab2" class="tab">
+            Tab 2 Content
         </div>
-        <script src="scrip.js"></script>
+    </div>
+
+    <script>
+        // Execute button functionality
+        document.getElementById('execute-btn').addEventListener('click', function() {
+            var script = document.getElementById('script-editor').value;
+            // Execute the script using Script-Ware iOS or Executor Gui
+            executeScript(script);
+        });
+
+        // Clear button functionality
+        document.getElementById('clear-btn').addEventListener('click', function() {
+            document.getElementById('script-editor').value = '';
+        });
+
+        // Function to switch between tabs
+        function openTab(tabName) {
+            var i, tabContent, tabLinks;
+            tabContent = document.getElementsByClassName("tab");
+            for (i = 0; i < tabContent.length; i++) {
+                tabContent[i].style.display = "none";
+            }
+            tabLinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tabLinks.length; i++) {
+                tabLinks[i].classList.remove("active");
+            }
+            document.getElementById(tabName).style.display = "block";
+            event.currentTarget.classList.add("active");
+        }
+
+        // Function to execute the script
+        function executeScript(script) {
+            // Code to execute the script using Script-Ware iOS or Executor Gui
+            console.log('Executing script:', script);
+        }
+    </script>
 </body>
 </html>
+
