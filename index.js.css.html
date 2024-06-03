@@ -5,13 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mod Menu</title>
     <style>
-        /* CSS styles here */
+        /* CSS styles */
+        .mod-menu {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .menu-toggle {
+            cursor: pointer;
+        }
+
+        .menu-content {
+            display: none;
+        }
+
+        .menu-content.active {
+            display: block;
+        }
+
+        .menu-icon {
+            width: 30px;
+            height: 30px;
+        }
     </style>
 </head>
 <body>
     <div class="mod-menu">
         <div class="menu-toggle">
-            <img src="https://cdn.beacons.ai/user_content/HKYL7Jf69Rg4xcmEulUqK2h0j0r1/profile_cat_hub.gif?t=1715789928531" alt="Menu Icon" class="menu-icon">
+            <img src="square_icon.png" alt="Menu Icon" class="menu-icon">
         </div>
         <div class="menu-content">
             <button onclick="setWalkSpeed()">Set Walkspeed</button>
@@ -21,40 +47,36 @@
         </div>
     </div>
     <script>
+        // JavaScript code (IIFE)
         (function() {
-    document.querySelector('.menu-toggle').addEventListener('click', function() {
-        document.querySelector('.menu-content').classList.toggle('active');
-    });
+            function setWalkSpeed() {
+                const walkspeed = prompt("Enter Walkspeed:");
+                if (walkspeed !== null) {
+                    alert(`Walkspeed set to ${walkspeed}`);
+                    // Example: Set walkspeed for the local player
+                    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = parseFloat(walkspeed);
+                }
+            }
 
-    function setWalkSpeed() {
-        const walkspeed = prompt("Enter Walkspeed:");
-        if (walkspeed !== null) {
-            alert(`Walkspeed set to ${walkspeed}`);
-            // Example: Set walkspeed in the game workspace
-            game.workspace.setWalkspeed(walkspeed);
-        }
-    }
+            function setJumpPower() {
+                const jumpPower = prompt("Enter Jump Power:");
+                if (jumpPower !== null) {
+                    alert(`Jump Power set to ${jumpPower}`);
+                    // Example: Set jump power for the local player
+                    game.Players.LocalPlayer.Character.Humanoid.JumpPower = parseFloat(jumpPower);
+                }
+            }
 
-    function setJumpPower() {
-        const jumpPower = prompt("Enter Jump Power:");
-        if (jumpPower !== null) {
-            alert(`Jump Power set to ${jumpPower}`);
-            // Example: Set jump power in the game workspace
-            game.workspace.setJumpPower(jumpPower);
-        }
-    }
+            function toggleNoclip() {
+                // Example: Toggle noclip mode for the local player
+                game.Players.LocalPlayer.Character.Humanoid:ChangeState(11);
+            }
 
-    function toggleNoclip() {
-        // Example: Toggle noclip mode in the game workspace
-        game.workspace.toggleNoclip();
-    }
-
-    function joinDiscord() {
-        // Example: Open a link to join the game's Discord server
-        window.open("https://discord.com/invite/game");
-    }
-})();
-
+            function joinDiscord() {
+                // Example: Open a link to join the game's Discord server
+                window.open("https://discord.com/invite/roblox");
+            }
+        })();
     </script>
 </body>
 </html>
