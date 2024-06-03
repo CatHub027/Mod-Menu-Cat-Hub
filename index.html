@@ -46,7 +46,7 @@
         // Execute button functionality
         document.getElementById('execute-btn').addEventListener('click', function() {
             var script = document.getElementById('script-editor').value;
-            // Execute the script using Script-Ware iOS or Executor Gui
+            // Execute the Lua script
             executeScript(script);
         });
 
@@ -70,12 +70,14 @@
             event.currentTarget.classList.add("active");
         }
 
-        // Function to execute the script
+        // Function to execute the Lua script
         function executeScript(script) {
-            // Code to execute the script using Script-Ware iOS or Executor Gui
-            console.log('Executing script:', script);
+            // Code to execute the Lua script
+            console.log('Executing Lua script:', script);
+            // Example: You can use an API to execute Lua scripts in a Lua environment
+            // For instance, you can use a Lua interpreter like LuaJIT or Luvit
+            // Or if you're using a specific platform or game, find the appropriate method to execute Lua scripts
         }
     </script>
 </body>
 </html>
-
